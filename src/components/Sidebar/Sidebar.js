@@ -42,7 +42,7 @@ class Sidebar extends Component {
         <div className="logo">
           
           <a
-            href="https://www.creative-tim.com?ref=lbd-sidebar"
+            href=""
             className="simple-text logo-normal"
           >
             Product Manager

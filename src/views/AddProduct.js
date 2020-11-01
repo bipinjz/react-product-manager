@@ -17,6 +17,50 @@ import Button from "components/CustomButton/CustomButton.js";
 import image from "assets/img/loan.jpg";
 
 class AddProduct extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      isLoaded: false,
+      item: {
+        title: ""
+      }
+    };
+  }  
+
+
+  savePost() {
+    // POST request using fetch with error handling
+    const requestOptions = {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
+        },
+        body: JSON.stringify({ title: 'React POST Request Example', status : 'publish'  })
+    };
+    fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/', requestOptions)
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response status
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+
+            //this.setState({ postId: data.id })
+        })
+        .catch(error => {
+           // this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });
+      }
+
+
+
   render() {
     return (
       <div className="content">
@@ -82,7 +126,7 @@ class AddProduct extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Button bsStyle="info" pullRight fill type="submit">
+                    <Button bsStyle="info" onClick={this.savePost} pullRight fill >
                       Add Product
                     </Button>
                     <div className="clearfix" />
