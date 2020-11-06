@@ -24,21 +24,29 @@ class AddProduct extends Component {
       error: null,
       isLoaded: false,
       item: {
-        title: ""
+        title: "bbb"
       }
     };
   }  
 
 
-  savePost() {
+  updateTitle(e){
+    console.log("clicked", e.target.value);
+    this.setState({item : { title: e.target.value}});
+  }
+
+  savePost(pTitle) {
     // POST request using fetch with error handling
+
+    console.log("bbbb");
+
     const requestOptions = {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
           'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
         },
-        body: JSON.stringify({ title: 'React POST Request Example', status : 'publish'  })
+        body: JSON.stringify({ title: pTitle, status : 'publish'  })
     };
     fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/', requestOptions)
         .then(async response => {
@@ -62,6 +70,8 @@ class AddProduct extends Component {
 
 
   render() {
+
+    console.log(this.state);
     return (
       <div className="content">
         <Grid fluid>
@@ -72,7 +82,7 @@ class AddProduct extends Component {
                 content={
                   <form>
                     
-                                        <FormInputs
+                                        <FormInputs 
                       ncols={["col-md-12"]}
                       properties={[
                         {
@@ -81,7 +91,8 @@ class AddProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "Enter Product Title",
                           defaultValue:
-                            ""
+                            "",
+                            onChange : (event) => this.updateTitle(event)
                         }
                       ]}
                     />
@@ -126,7 +137,7 @@ class AddProduct extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Button bsStyle="info" onClick={this.savePost} pullRight fill >
+                    <Button bsStyle="info" onClick={() => this.savePost(this.state.item.title)} pullRight fill >
                       Add Product
                     </Button>
                     <div className="clearfix" />

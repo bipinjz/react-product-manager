@@ -16,8 +16,59 @@ class ProductsList extends Component {
     };
   }  
 
+  deleteProduct = (id, event) => {
 
-  componentDidMount() {
+    event.preventDefault()
+
+    var url = "http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id;
+
+      const requestOptions = {
+          method: 'DELETE',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
+          }
+      };
+      fetch(url, requestOptions).then( () => {
+        this.getProducts();
+      })
+      .catch(error => {
+            // this.setState({ errorMessage: error.toString() });
+              console.error('There was an error!', error);
+              alert(error)
+          });
+        
+
+
+  }
+
+  editProduct = (id, event) => {
+   event.preventDefault()
+
+    var url = "http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id;
+
+    console.log(url);
+    
+      const requestOptions = {
+          method: 'UPDATE',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
+          }
+      };
+      fetch(url, requestOptions).then( () => {
+        //this.getProducts();
+      })
+      .catch(error => {
+            // this.setState({ errorMessage: error.toString() });
+              console.error('There was an error!', error);
+              alert(error)
+          });
+        
+
+  }
+
+  getProducts = () => {
     fetch("http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/")
       .then(res => res.json())
       .then(
@@ -38,6 +89,10 @@ class ProductsList extends Component {
           });
         }
       )
+  }
+
+  componentDidMount() {
+    this.getProducts();
   }
 
   render() {
@@ -75,7 +130,9 @@ class ProductsList extends Component {
                         <td >{item.title.rendered}</td>
                         <td >{item.acf.interest_rate}</td>
                         <td >{item.acf.comparison_rate}</td>
-                        <td ><a href="#">Edit</a> <a href="">Delete</a></td>
+                        <td >
+                        <a href="" onClick={(event) => this.editProduct(item.id, event)}>Edit</a> &nbsp;
+                        <a href="" onClick={(event) => this.deleteProduct(item.id, event)}>Delete</a></td>
                           </tr>
                         );
                       })}
