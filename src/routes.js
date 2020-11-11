@@ -3,6 +3,7 @@ import Dashboard from "views/Dashboard";
 import ProductsList from 'views/ProductsList';
 import AddProduct from 'views/AddProduct';
 import AddCampaign from 'views/AddCampaign';
+import Login from 'views/Login';
 
 
 const dashboardRoutes = [
@@ -33,6 +34,13 @@ const dashboardRoutes = [
     name: "Add Campaign",
     icon: "pe-7s-loop",
     component: AddCampaign,
+    layout: "/admin"
+  },
+  {
+    path: "/login",
+    name: "Login",
+    icon: "pe-7s-loop",
+    component: Login,
     layout: "/admin"
   }
 ];

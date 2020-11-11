@@ -6,6 +6,7 @@ import NotificationSystem from "react-notification-system";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
+import Login from "views/Login";
 
 
 import { style } from "variables/Variables.js";
@@ -21,7 +22,9 @@ class Admin extends Component {
       image: "",
       color: "black",
       hasImage: true,
-      fixedClasses: "dropdown show-dropdown open"
+      fixedClasses: "dropdown show-dropdown open",
+      userToken:"",
+      userName:""
     };
   }
   handleNotificationClick = position => {
@@ -55,6 +58,7 @@ class Admin extends Component {
               <prop.component
                 {...props}
                 handleClick={this.handleNotificationClick}
+                userToken={this.state.userToken}
               />
             )}
             key={key}
@@ -93,6 +97,13 @@ class Admin extends Component {
       this.setState({ fixedClasses: "dropdown" });
     }
   };
+
+  test = (tokenData) =>{
+      console.log("tokenData",tokenData);
+      this.setState({userToken: tokenData.token})
+      this.setState({userName: tokenData.user_display_name})
+  }
+
   componentDidMount() {
     this.setState({ _notificationSystem: this.refs.notificationSystem });
     var _notificationSystem = this.refs.notificationSystem;
@@ -131,9 +142,12 @@ class Admin extends Component {
     }
   }
   render() {
+
+    console.log("routes", routes);
+
     return (
       <div className="wrapper">
-        <NotificationSystem ref="notificationSystem" style={style} />
+        
         <Sidebar {...this.props} routes={routes} image={this.state.image}
         color={this.state.color}
         hasImage={this.state.hasImage}/>
@@ -142,7 +156,10 @@ class Admin extends Component {
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
-          <Switch>{this.getRoutes(routes)}</Switch>
+
+
+          {(this.state.userToken == "")? <Login getToken={this.test}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
+          
           <Footer />
           
         </div>

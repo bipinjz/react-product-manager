@@ -20,13 +20,17 @@ class ProductsList extends Component {
 
     event.preventDefault()
 
+    //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
+
+    const token = this.props.userToken;
+    
     var url = "http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id;
 
       const requestOptions = {
           method: 'DELETE',
           headers: { 
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
+            'Authorization': 'Bearer '+token 
           }
       };
       fetch(url, requestOptions).then( () => {
@@ -49,12 +53,17 @@ class ProductsList extends Component {
 
     console.log(url);
     
+    //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
+
+    const token = this.props.userToken;
+
       const requestOptions = {
-          method: 'UPDATE',
+          method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDQxOTU2NTEsIm5iZiI6MTYwNDE5NTY1MSwiZXhwIjoxNjA0ODAwNDUxLCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.Qhm_FZ5unzdMLcZ2jBqJ_FOBoVTJZXlcBAZZoPcIon8' 
-          }
+            'Authorization': 'Bearer '+token 
+          },
+          body: JSON.stringify({ title: "bbbb", status : 'publish'  })
       };
       fetch(url, requestOptions).then( () => {
         //this.getProducts();
