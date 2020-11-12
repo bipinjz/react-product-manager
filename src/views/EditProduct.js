@@ -16,7 +16,7 @@ import Button from "components/CustomButton/CustomButton.js";
 
 import image from "assets/img/loan.jpg";
 
-class AddProduct extends Component {
+class EditProduct extends Component {
 
   constructor(props) {
     super(props);
@@ -24,12 +24,16 @@ class AddProduct extends Component {
       error: null,
       isLoaded: false,
       
-        title: "bbb",
+        title: "",
         intRate: "",
         compRate: ""
       
     };
   }  
+
+  componentDidMount() {
+     this.getProducts();
+  }
 
 
   updateTitle(e){
@@ -47,11 +51,45 @@ class AddProduct extends Component {
     this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: e.target.value});
   }
 
+  getProducts = () => {
+
+    const id = this.props.location.state.id;
+
+    fetch("http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id)
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          console.log(result)
+
+          this.setState({
+            isLoaded: true,
+            title: result.title.rendered,
+            intRate: result.acf.interest_rate,
+            compRate: result.acf.comparison_rate
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+
+
   savePost(pTitle, intRate, compRate) {
     // POST request using fetch with error handling
 
 
     //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
+
+    const id = this.props.location.state.id;
 
     const token = this.props.userToken;
 
@@ -63,7 +101,7 @@ class AddProduct extends Component {
         },
         body: JSON.stringify({ title: pTitle, status : 'publish' , fields : {comparison_rate : compRate, interest_rate: intRate}  })
     };
-    fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/', requestOptions)
+    fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/'+id, requestOptions)
         .then(async response => {
             const data = await response.json();
 
@@ -74,7 +112,7 @@ class AddProduct extends Component {
                 return Promise.reject(error);
             }
 
-            window.alert("Added!");
+            window.alert("Updated!");
             this.props.history.push('/admin/productsList')
 
             //this.setState({ postId: data.id })
@@ -91,16 +129,16 @@ class AddProduct extends Component {
 
     //console.log("aaaaa",this.props);
 
-    //console.log("this.props.userToken", this.props.userToken);
+    console.log("this.props.ppp", this.props.location.state.id);
 
     return (
       <div className="content">
-       -- {this.state.props}
+       
         <Grid fluid>
           <Row>
             <Col md={8}>
               <Card
-                title="Add Product"
+                title="Edit Product"
                 content={
                   <form>
                     
@@ -111,9 +149,9 @@ class AddProduct extends Component {
                           label: "Title",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Enter Product Title",
+                          placeholder: "",
                           defaultValue:
-                            "",
+                            this.state.title,
                             onChange : (event) => this.updateTitle(event)
                         }
                       ]}
@@ -125,8 +163,8 @@ class AddProduct extends Component {
                           label: "Interest Rate",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Enter Interest Rate",
-                          defaultValue: "",
+                          placeholder: "",
+                          defaultValue: this.state.intRate,
                           onChange : (event) => this.updateIntRate(event)
                         }
                       ]}
@@ -140,8 +178,8 @@ class AddProduct extends Component {
                           label: "Comparison Rate",
                           type: "text",
                           bsClass: "form-control",
-                          placeholder: "Enter Comparison Rate",
-                          defaultValue: "",
+                          placeholder: "",
+                          defaultValue: this.state.compRate,
                           onChange : (event) => this.updateCompRate(event)
                         }
                       ]}
@@ -162,7 +200,7 @@ class AddProduct extends Component {
                       </Col>
                     </Row>
                     <Button bsStyle="info" onClick={() => this.savePost(this.state.title, this.state.intRate, this.state.compRate)} pullRight fill >
-                      Add Product
+                      Save Product
                     </Button>
                     <div className="clearfix" />
                   </form>
@@ -173,12 +211,15 @@ class AddProduct extends Component {
               <UserCard
                 bgImage={image}
                 avatar=""
-                name="Product Title"
+                name={this.state.title}
                 userName=""
                 description={
                   <span>
-                    Product Desc
+                    Product Desc <br/>
+                    Int: {this.state.intRate} <br/>
+                  Comp: {this.state.compRate} <br/>
                   </span>
+                  
                 }
                 socials={
                   <div>
@@ -200,4 +241,4 @@ class AddProduct extends Component {
   }
 }
 
-export default AddProduct;
+export default EditProduct;

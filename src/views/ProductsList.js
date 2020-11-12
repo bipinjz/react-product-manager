@@ -4,6 +4,7 @@ import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.js";
 import { thArray, tdArray } from "variables/Variables.js";
+import { Link } from 'react-router-dom';
 
 class ProductsList extends Component {
 
@@ -20,10 +21,14 @@ class ProductsList extends Component {
 
     event.preventDefault()
 
-    //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
+    let c = window.confirm("Are you sure?");
+   if(!c){
+
+     return;
+   }
 
     const token = this.props.userToken;
-    
+
     var url = "http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id;
 
       const requestOptions = {
@@ -49,32 +54,7 @@ class ProductsList extends Component {
   editProduct = (id, event) => {
    event.preventDefault()
 
-    var url = "http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id;
-
-    console.log(url);
-    
-    //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
-
-    const token = this.props.userToken;
-
-      const requestOptions = {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer '+token 
-          },
-          body: JSON.stringify({ title: "bbbb", status : 'publish'  })
-      };
-      fetch(url, requestOptions).then( () => {
-        //this.getProducts();
-      })
-      .catch(error => {
-            // this.setState({ errorMessage: error.toString() });
-              console.error('There was an error!', error);
-              alert(error)
-          });
-        
-
+   
   }
 
   getProducts = () => {
@@ -140,7 +120,7 @@ class ProductsList extends Component {
                         <td >{item.acf.interest_rate}</td>
                         <td >{item.acf.comparison_rate}</td>
                         <td >
-                        <a href="" onClick={(event) => this.editProduct(item.id, event)}>Edit</a> &nbsp;
+                        <Link to={{ pathname: '/admin/editProduct/', state: { id: item.id} }} > Edit  </Link>
                         <a href="" onClick={(event) => this.deleteProduct(item.id, event)}>Delete</a></td>
                           </tr>
                         );
