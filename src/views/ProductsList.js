@@ -116,6 +116,7 @@ class ProductsList extends Component {
                         return (
                           <tr key={item.id}>
                         <td >{item.id}</td>  
+                        <td ><img src={item.acf.image} style={{width:'100px' , height:'auto'}} /></td>  
                         <td >{item.title.rendered}</td>
                         <td >{item.acf.interest_rate}</td>
                         <td >{item.acf.comparison_rate}</td>

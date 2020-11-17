@@ -15,7 +15,7 @@ class AdminNavbarLinks extends Component {
     return (
       <div>
         
-        <Nav pullRight>
+        <Nav pullRight> @@@ {this.props.getToken}
             <NavItem eventKey={3} href="#">
             Log out
           </NavItem>

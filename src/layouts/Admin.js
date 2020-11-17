@@ -98,7 +98,7 @@ class Admin extends Component {
     }
   };
 
-  test = (tokenData) =>{
+  getToken = (tokenData) =>{
       console.log("tokenData",tokenData);
       this.setState({userToken: tokenData.token})
       this.setState({userName: tokenData.user_display_name})
@@ -155,10 +155,11 @@ class Admin extends Component {
           <AdminNavbar
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
+            userToken={this.state.userToken}
           />
 
 
-          {(this.state.userToken == "")? <Login getToken={this.test}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
+          {(this.state.userToken == "")? <Login getToken={this.getToken}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
           
           <Footer />
           

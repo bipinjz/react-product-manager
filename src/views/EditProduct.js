@@ -13,8 +13,9 @@ import { Card } from "components/Card/Card.js";
 import { FormInputs } from "components/FormInputs/FormInputs.js";
 import { UserCard } from "components/UserCard/UserCard.js";
 import Button from "components/CustomButton/CustomButton.js";
+import parse from 'html-react-parser';
 
-import image from "assets/img/loan.jpg";
+//import image from "assets/img/loan.jpg";
 
 class EditProduct extends Component {
 
@@ -26,8 +27,9 @@ class EditProduct extends Component {
       
         title: "",
         intRate: "",
-        compRate: ""
-      
+        compRate: "",
+        img:"",
+        desc:"" 
     };
   }  
 
@@ -65,8 +67,12 @@ class EditProduct extends Component {
           this.setState({
             isLoaded: true,
             title: result.title.rendered,
+            desc: result.content.rendered,
             intRate: result.acf.interest_rate,
-            compRate: result.acf.comparison_rate
+            compRate: result.acf.comparison_rate,
+            img: result.acf.image,
+            viewLink: result.acf.view_link,
+            applyLink: result.acf.label_link
           });
         },
         // Note: it's important to handle errors here
@@ -142,7 +148,7 @@ class EditProduct extends Component {
                 content={
                   <form>
                     
-                                        <FormInputs 
+                    <FormInputs 
                       ncols={["col-md-12"]}
                       properties={[
                         {
@@ -199,6 +205,35 @@ class EditProduct extends Component {
                         </FormGroup>
                       </Col>
                     </Row>
+
+                    <FormInputs 
+                      ncols={["col-md-12"]}
+                      properties={[
+                        {
+                          label: "View Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "",
+                          defaultValue:
+                            this.state.viewLink
+                            //onChange : (event) => this.updateTitle(event)
+                        }
+                      ]}
+                    />
+                    <FormInputs 
+                      ncols={["col-md-12"]}
+                      properties={[
+                        {
+                          label: "Apply Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "",
+                          defaultValue:
+                            this.state.applyLink
+                            //onChange : (event) => this.updateTitle(event)
+                        }
+                      ]}
+                    />
                     <Button bsStyle="info" onClick={() => this.savePost(this.state.title, this.state.intRate, this.state.compRate)} pullRight fill >
                       Save Product
                     </Button>
@@ -209,13 +244,13 @@ class EditProduct extends Component {
             </Col>
             <Col md={4}>
               <UserCard
-                bgImage={image}
+                bgImage={this.state.img}
                 avatar=""
                 name={this.state.title}
                 userName=""
                 description={
                   <span>
-                    Product Desc <br/>
+                    {parse(this.state.desc)}<br/>
                     Int: {this.state.intRate} <br/>
                   Comp: {this.state.compRate} <br/>
                   </span>
@@ -223,12 +258,12 @@ class EditProduct extends Component {
                 }
                 socials={
                   <div>
-                    <Button simple>
+                    <a href={this.state.viewLink}  target="_blank">
                       View Details
-                    </Button>
-                    <Button simple>
+                    </a> &nbsp; &nbsp;
+                    <a href={this.state.applyLink} target="_blank">
                       Apply
-                    </Button>
+                    </a>
                     
                   </div>
                 }

@@ -26,25 +26,41 @@ class AddProduct extends Component {
       
         title: "bbb",
         intRate: "",
-        compRate: ""
+        compRate: "",
+        image: "",
+        desc: ""
       
     };
   }  
 
 
   updateTitle(e){
-    console.log("11", this.state.props);
-    console.log("clicked", e.target.value);
     this.setState({ title: e.target.value});
   }
 
   updateIntRate(e){
-    console.log("clicked", e.target.value);
     this.setState({title: this.state.title, compRate: this.state.compRate, intRate: e.target.value});
   }
   updateCompRate(e){
-    console.log("clicked", e.target.value);
     this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: e.target.value});
+  }
+
+  
+  updateImage(e){
+    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: e.target.value});
+  }
+
+  
+  updateDesc(e){
+    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
+  }
+
+  updateApplyLink(e){
+    //this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
+  }
+
+  updateLearnMoreLink(e){
+    //this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
   }
 
   savePost(pTitle, intRate, compRate) {
@@ -156,11 +172,52 @@ class AddProduct extends Component {
                             componentClass="textarea"
                             bsClass="form-control"
                             placeholder="Enter Description"
-                            defaultValue=""
+                            defaultValue="" onChange = {(event) => this.updateCompRate(event)}
                           />
                         </FormGroup>
                       </Col>
                     </Row>
+                    <Row>
+                      <Col md={12}>
+                        <FormGroup controlId="formControlsTextarea">
+                          <ControlLabel>Image</ControlLabel>
+                          <select class="form-control" onChange={(event) => this.updateImage(event)}>
+                          <option value="image1">Image 1</option>
+                          <option value="image2">Image 2</option>
+                          <option value="image3">Image 3</option>
+                        </select>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                
+                    <FormInputs
+                      ncols={["col-md-6"]}
+                      properties={[
+                        
+                        {
+                          label: "Apply Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Enter Apply Link",
+                          defaultValue: "",
+                          onChange : (event) => this.updateApplyLink(event)
+                        }
+                      ]}
+                    />
+                    <FormInputs
+                      ncols={["col-md-6"]}
+                      properties={[
+                        
+                        {
+                          label: "Learn More Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "Enter Learn More",
+                          defaultValue: "",
+                          onChange : (event) => this.updateLearnMoreLink(event)
+                        }
+                      ]}
+                    />
                     <Button bsStyle="info" onClick={() => this.savePost(this.state.title, this.state.intRate, this.state.compRate)} pullRight fill >
                       Add Product
                     </Button>
@@ -173,11 +230,14 @@ class AddProduct extends Component {
               <UserCard
                 bgImage={image}
                 avatar=""
-                name="Product Title"
+                name={this.state.title}
                 userName=""
                 description={
                   <span>
-                    Product Desc
+                    {this.state.desc}
+                    Int Rate: {this.state.intRate}
+                    Comp Rate: {this.state.compRate}
+                    Image: {this.state.image}
                   </span>
                 }
                 socials={
