@@ -45,12 +45,16 @@ class EditProduct extends Component {
   }
 
   updateIntRate(e){
-    console.log("clicked", e.target.value);
     this.setState({title: this.state.title, compRate: this.state.compRate, intRate: e.target.value});
   }
   updateCompRate(e){
-    console.log("clicked", e.target.value);
     this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: e.target.value});
+  }
+  updateDesc(e){
+    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, desc: e.target.value});
+  }
+  updateImage(e){
+    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, desc: this.state.desc, img: e.target.value});
   }
 
   getProducts = () => {
@@ -195,13 +199,24 @@ class EditProduct extends Component {
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Description</ControlLabel>
-                          <FormControl
-                            rows="5"
-                            componentClass="textarea"
-                            bsClass="form-control"
-                            placeholder="Enter Description"
-                            defaultValue=""
-                          />
+                          <textarea id="noter-text-area" class="form-control" rows="5" name="textarea" 
+                          onChange={(event) => this.updateDesc(event)} 
+                          value={this.state.desc} />
+          
+                        </FormGroup>
+                       
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col md={12}>
+                        <FormGroup controlId="formControlsTextarea">
+                          <ControlLabel>Image</ControlLabel>
+                          <select class="form-control" onChange={(event) => this.updateImage(event)}>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
+                        </select>
                         </FormGroup>
                       </Col>
                     </Row>

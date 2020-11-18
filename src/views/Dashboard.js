@@ -20,6 +20,19 @@ import {
 } from "variables/Variables.js";
 
 class Dashboard extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      productsCount:"",
+      products:[]
+    }
+  }
+
+  componentDidMount(){
+    this.getProducts();
+  }
+
   createLegend(json) {
     var legend = [];
     for (var i = 0; i < json["names"].length; i++) {
@@ -30,6 +43,37 @@ class Dashboard extends Component {
     }
     return legend;
   }
+
+  getProducts = () => {
+    fetch("http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/")
+      .then(res => res.json())
+      .then(
+        (result) => {
+
+          console.log(result);
+
+          this.setState({
+            isLoaded: true,
+            productsCount: result.length,
+            products: result
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+  getProductList(){
+    
+  }
+
   render() {
     return (
       <div className="content">
@@ -39,7 +83,7 @@ class Dashboard extends Component {
               <StatsCard
                 bigIcon={<i className="fa fa-list text-info" />}
                 statsText="Products"
-                statsValue="10"
+                statsValue={this.state.productsCount}
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText=""
               />
@@ -142,14 +186,19 @@ class Dashboard extends Component {
 
             <Col md={6}>
               <Card
-                title="Audit Log"
+                title="Products"
                 category=""
                 stats="Updated 1 sec ago"
                 statsIcon="fa fa-history"
                 content={
                   <div className="table-full-width">
-                    <table className="table">
-                      <Tasks />
+                    <table className="table"><tbody>
+                      {this.state.products.map((item) => {
+                        return(
+                        <tr key={item.id}><td>{item.title.rendered}</td></tr>
+                        )
+                        
+                      })}</tbody>
                     </table>
                   </div>
                 }

@@ -20,13 +20,7 @@ export class Card extends Component {
         >
           {this.props.content}
 
-          <div className="footer">
-            {this.props.legend}
-            {this.props.stats != null ? <hr /> : ""}
-            <div className="stats">
-              <i className={this.props.statsIcon} /> {this.props.stats}
-            </div>
-          </div>
+          
         </div>
       </div>
     );
