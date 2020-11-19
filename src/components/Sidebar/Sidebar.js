@@ -52,7 +52,7 @@ class Sidebar extends Component {
         <div className="sidebar-wrapper">
           <ul className="nav">
             {this.state.width <= 991 ? <AdminNavbarLinks userToken={this.props.userToken} /> : null}
-            {this.props.routes.filter((p)=>{ return p.name != "Login" }).map((prop, key) => {
+            {this.props.routes.filter((p)=>{ return p.name != "Login" && p.name != "Edit Product" }).map((prop, key) => {
               if (!prop.redirect)
                 return (
                   <li
