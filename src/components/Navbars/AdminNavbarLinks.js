@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import { NavItem, Nav, NavDropdown, MenuItem } from "react-bootstrap";
 
 class AdminNavbarLinks extends Component {
+  constructor(props){
+    super(props)
+
+  }
   render() {
     const notification = (
       <div>
@@ -14,12 +18,14 @@ class AdminNavbarLinks extends Component {
     );
     return (
       <div>
-        
-        <Nav pullRight>
-            <NavItem eventKey={3} href="#">
+        {(this.props.userToken != "") 
+        ? <Nav pullRight>
+            <NavItem eventKey={3} onClick={() => window.location.reload()}>
             Log out
           </NavItem>
         </Nav>
+        : ""
+        }
       </div>
     );
   }

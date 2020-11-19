@@ -42,7 +42,6 @@ class Login extends Component {
         .then(async response => {
             const data = await response.json();
 
-            console.log(data)
             this.props.getToken(data);
 
             // check for error response
@@ -63,12 +62,9 @@ class Login extends Component {
 
   render() {
 
-    console.log(this.state);
-
-    console.log("fff",this.props);
-
     return (
-      <div >
+      <div>
+        <br/>
         <Grid fluid>
           <Row>
             <Col md={8}>

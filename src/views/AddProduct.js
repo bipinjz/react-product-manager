@@ -105,13 +105,9 @@ class AddProduct extends Component {
 
   render() {
 
-    //console.log("aaaaa",this.props);
-
-    //console.log("this.props.userToken", this.props.userToken);
-
     return (
       <div className="content">
-       -- {this.state.props}
+       
         <Grid fluid>
           <Row>
             <Col md={8}>

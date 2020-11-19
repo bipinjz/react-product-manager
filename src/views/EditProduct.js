@@ -39,8 +39,6 @@ class EditProduct extends Component {
 
 
   updateTitle(e){
-    console.log("11", this.state.props);
-    console.log("clicked", e.target.value);
     this.setState({ title: e.target.value});
   }
 
@@ -66,7 +64,6 @@ class EditProduct extends Component {
       .then(
         (result) => {
 
-          console.log(result)
 
           this.setState({
             isLoaded: true,
@@ -137,9 +134,6 @@ class EditProduct extends Component {
 
   render() {
 
-    //console.log("aaaaa",this.props);
-
-    console.log("this.props.ppp", this.props.location.state.id);
 
     return (
       <div className="content">

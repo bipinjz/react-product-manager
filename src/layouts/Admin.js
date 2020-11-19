@@ -99,7 +99,6 @@ class Admin extends Component {
   };
 
   getToken = (tokenData) =>{
-      console.log("tokenData",tokenData);
       this.setState({userToken: tokenData.token})
       this.setState({userName: tokenData.user_display_name})
   }
@@ -143,12 +142,10 @@ class Admin extends Component {
   }
   render() {
 
-    console.log("routes", routes);
-
     return (
       <div className="wrapper">
         
-        <Sidebar {...this.props} routes={routes} image={this.state.image}
+        <Sidebar {...this.props} userToken={this.state.userToken} routes={routes} image={this.state.image}
         color={this.state.color}
         hasImage={this.state.hasImage}/>
         <div id="main-panel" className="main-panel" ref="mainPanel">

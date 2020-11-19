@@ -260,6 +260,15 @@ const tdArray = [
 
 ];
 
+const cthArray = ["ID", "Title", "Start Date", "End Date", "Status"];
+const ctdArray = [
+  ["443", "Plan Yourself Free", "Jan 2021", "--", "Scheduled"],
+  ["304", "What Would You Like The Power To Do?", "Jan 2020", "March 2020", "Completed"],
+  ["295", "Better Money Habits", "Sep 2019", "Dec 2019", "Completed"],
+
+
+];
+
 //
 // //
 // // // For icons
@@ -584,7 +593,9 @@ var legendBar = {
 module.exports = {
   style, // For notifications (App container and Notifications view)
   thArray,
-  tdArray, // For tables (TableList view)
+  tdArray, // For tables (TableList view),
+  cthArray,
+  ctdArray,
   iconsArray, // For icons (Icons view)
   dataPie,
   legendPie,

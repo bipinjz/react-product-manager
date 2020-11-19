@@ -3,7 +3,7 @@ import Dashboard from "views/Dashboard";
 import ProductsList from 'views/ProductsList';
 import AddProduct from 'views/AddProduct';
 import EditProduct from 'views/EditProduct';
-import AddCampaign from 'views/AddCampaign';
+import CampaignList from 'views/CampaignList';
 import Login from 'views/Login';
 
 
@@ -31,24 +31,24 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/addCampaign",
-    name: "Add Campaign",
+    path: "/editProduct",
+    name: "Edit Product",
+    icon: "fa fa-pencil-square-o",
+    component: EditProduct,
+    layout: "/admin"
+  },
+  {
+    path: "/campaignList",
+    name: "Campaign",
     icon: "pe-7s-loop",
-    component: AddCampaign,
+    component: CampaignList,
     layout: "/admin"
   },
   {
     path: "/login",
     name: "Login",
-    icon: "pe-7s-loop",
+    icon: "fa fa-sign-in",
     component: Login,
-    layout: "/admin"
-  },
-  {
-    path: "/editProduct",
-    name: "Edit Product",
-    icon: "pe-7s-loop",
-    component: EditProduct,
     layout: "/admin"
   }
 ];
