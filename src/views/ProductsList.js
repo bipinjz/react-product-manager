@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import Card from "components/Card/Card.js";
-import { thArray, tdArray } from "variables/Variables.js";
+import { thArray } from "variables/Variables.js";
 import { Link } from 'react-router-dom';
 
 class ProductsList extends Component {
@@ -94,12 +94,12 @@ class ProductsList extends Component {
         <Grid fluid>
           <Row>
             <Col md={12}>
-            <div className="card" style={{"min-height":"150px"}}><div className="header">
+            <div className="card" style={{"minHeight":"150px"}}><div className="header">
               <h4 className="title">Products</h4>
               <p className="category"></p>
               </div>
-              <div style={{"padding-left":"15px", "padding-top":"5px"}}>
-                <i class="fa fa-spinner  fa-spin"></i>  
+              <div style={{"paddingLeft":"15px", "paddingTop":"5px"}}>
+                <i className="fa fa-spinner  fa-spin"></i>  
               </div></div>
             </Col>
             </Row>
@@ -130,13 +130,13 @@ class ProductsList extends Component {
                         return (
                           <tr key={item.id}>
                         <td >{item.id}</td>  
-                        <td ><img src={item.acf.image} style={{width:'100px' , height:'auto'}} /></td>  
+                        <td ><img alt="" src={item.acf.image} style={{width:'100px' , height:'auto'}} /></td>  
                         <td >{item.title.rendered}</td>
                         <td >{item.acf.interest_rate}</td>
                         <td >{item.acf.comparison_rate}</td>
                         <td >
                         <Link to={{ pathname: '/admin/editProduct/', state: { id: item.id} }} > Edit  </Link>
-                        <a href="" onClick={(event) => this.deleteProduct(item.id, event)}>Delete</a></td>
+                        <a href="/" onClick={(event) => this.deleteProduct(item.id, event)}>Delete</a></td>
                           </tr>
                         );
                       })}

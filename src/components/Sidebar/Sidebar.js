@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.js";
 
-import logo from "assets/img/reactlogo.png";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -24,9 +23,7 @@ class Sidebar extends Component {
     window.addEventListener("resize", this.updateDimensions.bind(this));
   }
   render() {
-    const sidebarBackground = {
-      backgroundImage: "url(" + this.props.image + ")"
-    };
+    
     return (
       <div
         id="sidebar"
@@ -42,7 +39,7 @@ class Sidebar extends Component {
         <div className="logo">
           
           <a
-            href=""
+            href="/"
             className="simple-text logo-normal"
           >
             Product Manager
@@ -52,7 +49,7 @@ class Sidebar extends Component {
         <div className="sidebar-wrapper">
           <ul className="nav">
             {this.state.width <= 991 ? <AdminNavbarLinks userToken={this.props.userToken} /> : null}
-            {this.props.routes.filter((p)=>{ return p.name != "Login" && p.name != "Edit Product" }).map((prop, key) => {
+            {this.props.routes.filter((p)=>{ return p.name !== "Login" && p.name !== "Edit Product" }).map((prop, key) => {
               if (!prop.redirect)
                 return (
                   <li

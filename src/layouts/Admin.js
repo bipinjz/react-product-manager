@@ -1,15 +1,12 @@
 
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import NotificationSystem from "react-notification-system";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import Login from "views/Login";
 
-
-import { style } from "variables/Variables.js";
 
 import routes from "routes.js";
 
@@ -28,24 +25,7 @@ class Admin extends Component {
     };
   }
   handleNotificationClick = position => {
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
+    
     
   };
   getRoutes = routes => {
@@ -105,25 +85,6 @@ class Admin extends Component {
 
   componentDidMount() {
     this.setState({ _notificationSystem: this.refs.notificationSystem });
-    var _notificationSystem = this.refs.notificationSystem;
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
     
   }
   componentDidUpdate(e) {
@@ -156,7 +117,7 @@ class Admin extends Component {
           />
 
 
-          {(this.state.userToken == "")? <Login getToken={this.getToken}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
+          {(this.state.userToken === "")? <Login getToken={this.getToken}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
           
           <Footer />
           

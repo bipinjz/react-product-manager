@@ -3,18 +3,13 @@ import React, { Component } from "react";
 import {
   Grid,
   Row,
-  Col,
-  FormGroup,
-  ControlLabel,
-  FormControl
+  Col
 } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.js";
 import { FormInputs } from "components/FormInputs/FormInputs.js";
-import { UserCard } from "components/UserCard/UserCard.js";
 import Button from "components/CustomButton/CustomButton.js";
 
-import image from "assets/img/loan.jpg";
 
 class Login extends Component {
 

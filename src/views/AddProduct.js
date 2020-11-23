@@ -177,7 +177,7 @@ class AddProduct extends Component {
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Image</ControlLabel>
-                          <select class="form-control" onChange={(event) => this.updateImage(event)}>
+                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
                           <option value="image1">Image 1</option>
                           <option value="image2">Image 2</option>
                           <option value="image3">Image 3</option>

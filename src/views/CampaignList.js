@@ -84,7 +84,7 @@ class CampaignList extends Component {
 
   render() {
 
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
@@ -92,12 +92,12 @@ class CampaignList extends Component {
         <Grid fluid>
           <Row>
             <Col md={12}>
-            <div className="card" style={{"min-height":"150px"}}><div className="header">
+            <div className="card" style={{"minHeight":"150px"}}><div className="header">
               <h4 className="title">Products</h4>
               <p className="category"></p>
               </div>
-              <div style={{"padding-left":"15px", "padding-top":"5px"}}>
-                <i class="fa fa-spinner fa-spin"></i>  
+              <div style={{"paddingLeft":"15px", "paddingTop":"5px"}}>
+                <i className="fa fa-spinner fa-spin"></i>  
               </div></div>
             </Col>
             </Row>

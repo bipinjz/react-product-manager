@@ -5,17 +5,10 @@ import { Grid, Row, Col } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.js";
 import { StatsCard } from "components/StatsCard/StatsCard.js";
-import { Tasks } from "components/Tasks/Tasks.js";
 import { Link } from 'react-router-dom';
 
 
 import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
   dataBar,
   optionsBar,
   responsiveBar,
@@ -52,6 +45,8 @@ class Dashboard extends Component {
       .then(res => res.json())
       .then(
         (result) => {
+
+          console.log(result);
 
           this.setState({
             isLoaded: true,

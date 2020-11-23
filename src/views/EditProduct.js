@@ -5,8 +5,7 @@ import {
   Row,
   Col,
   FormGroup,
-  ControlLabel,
-  FormControl
+  ControlLabel
 } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.js";
@@ -193,7 +192,7 @@ class EditProduct extends Component {
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Description</ControlLabel>
-                          <textarea id="noter-text-area" class="form-control" rows="5" name="textarea" 
+                          <textarea id="noter-text-area" className="form-control" rows="5" name="textarea" 
                           onChange={(event) => this.updateDesc(event)} 
                           value={this.state.desc} />
           
@@ -206,7 +205,7 @@ class EditProduct extends Component {
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Image</ControlLabel>
-                          <select class="form-control" onChange={(event) => this.updateImage(event)}>
+                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
@@ -267,10 +266,10 @@ class EditProduct extends Component {
                 }
                 socials={
                   <div>
-                    <a href={this.state.viewLink}  target="_blank">
+                    <a href={this.state.viewLink}  target="_blank" rel="noopener noreferrer">
                       View Details
                     </a> &nbsp; &nbsp;
-                    <a href={this.state.applyLink} target="_blank">
+                    <a href={this.state.applyLink} target="_blank" rel="noopener noreferrer">
                       Apply
                     </a>
                     
