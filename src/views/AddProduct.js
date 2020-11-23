@@ -24,7 +24,7 @@ class AddProduct extends Component {
       error: null,
       isLoaded: false,
       
-        title: "bbb",
+        title: "",
         intRate: "",
         compRate: "",
         image: "",

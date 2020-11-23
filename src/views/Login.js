@@ -63,8 +63,7 @@ class Login extends Component {
   render() {
 
     return (
-      <div>
-        <br/>
+      <div className="content">
         <Grid fluid>
           <Row>
             <Col md={8}>
