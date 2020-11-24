@@ -250,7 +250,7 @@ var style = {
 // // // For tables
 // //
 //
-const thArray = ["ID", "Title", "Interest Rate", "Comparison Rate", "Edit/Delete"];
+const thArray = ["ID", "Image", "Title", "Interest Rate", "Comparison Rate", "Edit/Delete"];
 const tdArray = [
   ["1", "Standard Home Loan", "3.50% p.a", "3.60% p.a", ""],
   ["2", "Standard Variable Home Loan", "3.50% p.a", "3.60% p.a", ""],

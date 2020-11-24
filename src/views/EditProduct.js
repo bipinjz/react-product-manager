@@ -159,6 +159,19 @@ class EditProduct extends Component {
                         }
                       ]}
                     />
+                   <Row>
+                      <Col md={12}>
+                        <FormGroup controlId="formControlsTextarea">
+                          <ControlLabel>Image</ControlLabel>
+                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
+                        </select>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
                     <FormInputs
                       ncols={["col-md-6"]}
                       properties={[
@@ -201,33 +214,7 @@ class EditProduct extends Component {
                       </Col>
                     </Row>
 
-                    <Row>
-                      <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>Image</ControlLabel>
-                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
-                        </select>
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                    <FormInputs 
-                      ncols={["col-md-12"]}
-                      properties={[
-                        {
-                          label: "View Link",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "",
-                          defaultValue:
-                            this.state.viewLink
-                            //onChange : (event) => this.updateTitle(event)
-                        }
-                      ]}
-                    />
+                   
                     <FormInputs 
                       ncols={["col-md-12"]}
                       properties={[
@@ -238,6 +225,21 @@ class EditProduct extends Component {
                           placeholder: "",
                           defaultValue:
                             this.state.applyLink
+                            //onChange : (event) => this.updateTitle(event)
+                        }
+                      ]}
+                    />
+
+<FormInputs 
+                      ncols={["col-md-12"]}
+                      properties={[
+                        {
+                          label: "View Link",
+                          type: "text",
+                          bsClass: "form-control",
+                          placeholder: "",
+                          defaultValue:
+                            this.state.viewLink
                             //onChange : (event) => this.updateTitle(event)
                         }
                       ]}

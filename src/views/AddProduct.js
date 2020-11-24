@@ -14,7 +14,6 @@ import { FormInputs } from "components/FormInputs/FormInputs.js";
 import { UserCard } from "components/UserCard/UserCard.js";
 import Button from "components/CustomButton/CustomButton.js";
 
-import image from "assets/img/loan.jpg";
 
 class AddProduct extends Component {
 
@@ -27,48 +26,44 @@ class AddProduct extends Component {
         title: "",
         intRate: "",
         compRate: "",
-        image: "",
-        desc: ""
+        image: "http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg",
+        desc: "",
+        viewLink: "",
+        applyLink:""
       
     };
   }  
 
 
-  updateTitle(e){
-    this.setState({ title: e.target.value});
-  }
+  updateForm(e, type){
+    
+    if(type == "title"){
+      this.setState({title: e.target.value})
+    }
+    if(type == "intRate"){
+      this.setState({intRate: e.target.value})
+    }
+    if(type == "compRate"){
+      this.setState({compRate: e.target.value})
+    }
+    if(type == "image"){
+      this.setState({image: e.target.value})
+    }
+    if(type == "desc"){
+      this.setState({desc: e.target.value})
+    }
+    if(type == "viewLink"){
+      this.setState({viewLink: e.target.value})
+    }
+    if(type == "applyLink"){
+      this.setState({applyLink: e.target.value})
+    }
 
-  updateIntRate(e){
-    this.setState({title: this.state.title, compRate: this.state.compRate, intRate: e.target.value});
   }
-  updateCompRate(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: e.target.value});
-  }
-
   
-  updateImage(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: e.target.value});
-  }
 
-  
-  updateDesc(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
-  }
-
-  updateApplyLink(e){
-    //this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
-  }
-
-  updateLearnMoreLink(e){
-    //this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, image: this.state.image, desc: e.target.value});
-  }
-
-  savePost(pTitle, intRate, compRate) {
-    // POST request using fetch with error handling
-
-
-    //const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9iaXBpbmJhanJhY2hhcnlhLmNvbVwvcG9ydGZvbGlvXC9yZWFjdC1wcm9kdWN0LW1hbmFnZXItYWRtaW4iLCJpYXQiOjE2MDUwODAxNzYsIm5iZiI6MTYwNTA4MDE3NiwiZXhwIjoxNjA1Njg0OTc2LCJkYXRhIjp7InVzZXIiOnsiaWQiOiIxNyJ9fX0.SxN0kpUFZsVzDOBYSC-yqaYqvUQi6Aijl7-g8JtRYqo";
-
+  savePost(pTitle, intRate, compRate, image, viewLink,applyLink) {
+    
     const token = this.props.userToken;
 
     const requestOptions = {
@@ -77,7 +72,14 @@ class AddProduct extends Component {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+token 
         },
-        body: JSON.stringify({ title: pTitle, status : 'publish' , fields : {comparison_rate : compRate, interest_rate: intRate}  })
+        body: JSON.stringify({ title: pTitle, status : 'publish' , 
+        fields : {
+          comparison_rate : compRate, 
+          interest_rate: intRate,
+          image: image,
+          view_link: viewLink,
+          label_link: applyLink
+        }  })
     };
     fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/', requestOptions)
         .then(async response => {
@@ -126,10 +128,22 @@ class AddProduct extends Component {
                           placeholder: "Enter Product Title",
                           defaultValue:
                             "",
-                            onChange : (event) => this.updateTitle(event)
+                            onChange : (event) => this.updateForm(event, "title")
                         }
                       ]}
                     />
+                    <Row>
+                      <Col md={12}>
+                        <FormGroup controlId="formControlsTextarea">
+                          <ControlLabel>Image</ControlLabel>
+                          <select className="form-control" onChange={(event) => this.updateForm(event, "image")}>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
+                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
+                        </select>
+                        </FormGroup>
+                      </Col>
+                    </Row>
                     <FormInputs
                       ncols={["col-md-6"]}
                       properties={[
@@ -139,7 +153,7 @@ class AddProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "Enter Interest Rate",
                           defaultValue: "",
-                          onChange : (event) => this.updateIntRate(event)
+                          onChange : (event) => this.updateForm(event, "intRate")
                         }
                       ]}
                     />
@@ -154,7 +168,7 @@ class AddProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "Enter Comparison Rate",
                           defaultValue: "",
-                          onChange : (event) => this.updateCompRate(event)
+                          onChange : (event) => this.updateForm(event, "compRate")
                         }
                       ]}
                     />
@@ -168,23 +182,12 @@ class AddProduct extends Component {
                             componentClass="textarea"
                             bsClass="form-control"
                             placeholder="Enter Description"
-                            defaultValue="" onChange = {(event) => this.updateCompRate(event)}
+                            defaultValue="" onChange = {(event) => this.updateForm(event, "desc")}
                           />
                         </FormGroup>
                       </Col>
                     </Row>
-                    <Row>
-                      <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>Image</ControlLabel>
-                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
-                          <option value="image1">Image 1</option>
-                          <option value="image2">Image 2</option>
-                          <option value="image3">Image 3</option>
-                        </select>
-                        </FormGroup>
-                      </Col>
-                    </Row>
+                    
                 
                     <FormInputs
                       ncols={["col-md-6"]}
@@ -196,7 +199,7 @@ class AddProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "Enter Apply Link",
                           defaultValue: "",
-                          onChange : (event) => this.updateApplyLink(event)
+                          onChange : (event) => this.updateForm(event, "applyLink")
                         }
                       ]}
                     />
@@ -210,11 +213,15 @@ class AddProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "Enter Learn More",
                           defaultValue: "",
-                          onChange : (event) => this.updateLearnMoreLink(event)
+                          onChange : (event) => this.updateForm(event, "viewLink")
                         }
                       ]}
                     />
-                    <Button bsStyle="info" onClick={() => this.savePost(this.state.title, this.state.intRate, this.state.compRate)} pullRight fill >
+                    <Button bsStyle="info" onClick={() => this.savePost(
+                      this.state.title, this.state.intRate, this.state.compRate,
+                      this.state.image, this.state.viewLink, this.state.applyLink
+                      
+                      )} pullRight fill >
                       Add Product
                     </Button>
                     <div className="clearfix" />
@@ -224,16 +231,16 @@ class AddProduct extends Component {
             </Col>
             <Col md={4}>
               <UserCard
-                bgImage={image}
+                bgImage={this.state.image}
                 avatar=""
                 name={this.state.title}
                 userName=""
                 description={
                   <span>
-                    {this.state.desc}
-                    Int Rate: {this.state.intRate}
-                    Comp Rate: {this.state.compRate}
-                    Image: {this.state.image}
+                    <span>Int Rate: {this.state.intRate} % p.a <br/></span>
+                    <span>Comp Rate: {this.state.compRate} % p.a <br/></span>
+                    <span>{this.state.desc}</span>
+                    
                   </span>
                 }
                 socials={
