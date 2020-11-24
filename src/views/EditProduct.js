@@ -27,8 +27,10 @@ class EditProduct extends Component {
         title: "",
         intRate: "",
         compRate: "",
-        img:"",
-        desc:"" 
+        image:"",
+        desc:"",
+        viewLink: "",
+        applyLink:""
     };
   }  
 
@@ -37,22 +39,15 @@ class EditProduct extends Component {
   }
 
 
-  updateTitle(e){
-    this.setState({ title: e.target.value});
-  }
+  updateForm(e, type){
 
-  updateIntRate(e){
-    this.setState({title: this.state.title, compRate: this.state.compRate, intRate: e.target.value});
+    console.log(type);
+    
+    if(type !== ""){
+      this.setState({[type]: e.target.value})
+    }
   }
-  updateCompRate(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: e.target.value});
-  }
-  updateDesc(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, desc: e.target.value});
-  }
-  updateImage(e){
-    this.setState({ title: this.state.title, intRate: this.state.intRate, compRate: this.state.compRate, desc: this.state.desc, img: e.target.value});
-  }
+  
 
   getProducts = () => {
 
@@ -70,7 +65,7 @@ class EditProduct extends Component {
             desc: result.content.rendered,
             intRate: result.acf.interest_rate,
             compRate: result.acf.comparison_rate,
-            img: result.acf.image,
+            image: result.acf.image,
             viewLink: result.acf.view_link,
             applyLink: result.acf.label_link
           });
@@ -89,7 +84,7 @@ class EditProduct extends Component {
 
 
 
-  savePost(pTitle, intRate, compRate) {
+  savePost(pTitle, intRate, compRate, image, viewLink,applyLink) {
     // POST request using fetch with error handling
 
 
@@ -105,7 +100,14 @@ class EditProduct extends Component {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer '+token 
         },
-        body: JSON.stringify({ title: pTitle, status : 'publish' , fields : {comparison_rate : compRate, interest_rate: intRate}  })
+        body: JSON.stringify({ title: pTitle, status : 'publish' , 
+        fields : {
+          comparison_rate : compRate, 
+          interest_rate: intRate,
+          image: image,
+          view_link: viewLink,
+          label_link: applyLink
+        }  })
     };
     fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/'+id, requestOptions)
         .then(async response => {
@@ -155,7 +157,7 @@ class EditProduct extends Component {
                           placeholder: "",
                           defaultValue:
                             this.state.title,
-                            onChange : (event) => this.updateTitle(event)
+                            onChange : (event) => this.updateForm(event, "title")
                         }
                       ]}
                     />
@@ -163,7 +165,7 @@ class EditProduct extends Component {
                       <Col md={12}>
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Image</ControlLabel>
-                          <select className="form-control" onChange={(event) => this.updateImage(event)}>
+                          <select className="form-control" onChange={(event) => this.updateForm(event, "image")}>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
                           <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
@@ -181,7 +183,7 @@ class EditProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "",
                           defaultValue: this.state.intRate,
-                          onChange : (event) => this.updateIntRate(event)
+                          onChange : (event) => this.updateForm(event, "intRate")
                         }
                       ]}
                     />
@@ -196,7 +198,7 @@ class EditProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "",
                           defaultValue: this.state.compRate,
-                          onChange : (event) => this.updateCompRate(event)
+                          onChange : (event) => this.updateForm(event, "compRate")
                         }
                       ]}
                     />
@@ -206,7 +208,7 @@ class EditProduct extends Component {
                         <FormGroup controlId="formControlsTextarea">
                           <ControlLabel>Description</ControlLabel>
                           <textarea id="noter-text-area" className="form-control" rows="5" name="textarea" 
-                          onChange={(event) => this.updateDesc(event)} 
+                          onChange={(event) => this.updateForm(event, "desc")} 
                           value={this.state.desc} />
           
                         </FormGroup>
@@ -224,8 +226,8 @@ class EditProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "",
                           defaultValue:
-                            this.state.applyLink
-                            //onChange : (event) => this.updateTitle(event)
+                            this.state.applyLink,
+                            onChange : (event) => this.updateForm(event, "applyLink")
                         }
                       ]}
                     />
@@ -239,12 +241,15 @@ class EditProduct extends Component {
                           bsClass: "form-control",
                           placeholder: "",
                           defaultValue:
-                            this.state.viewLink
-                            //onChange : (event) => this.updateTitle(event)
+                            this.state.viewLink,
+                            onChange : (event) => this.updateForm(event, "viewLink")
                         }
                       ]}
                     />
-                    <Button bsStyle="info" onClick={() => this.savePost(this.state.title, this.state.intRate, this.state.compRate)} pullRight fill >
+                    <Button bsStyle="info" onClick={() => this.savePost(
+                      this.state.title, this.state.intRate, this.state.compRate,
+                      this.state.image, this.state.viewLink, this.state.applyLink
+                      )} pullRight fill >
                       Save Product
                     </Button>
                     <div className="clearfix" />
@@ -254,7 +259,7 @@ class EditProduct extends Component {
             </Col>
             <Col md={4}>
               <UserCard
-                bgImage={this.state.img}
+                bgImage={this.state.image}
                 avatar=""
                 name={this.state.title}
                 userName=""
