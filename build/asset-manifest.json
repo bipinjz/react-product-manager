@@ -1,21 +1,24 @@
 {
   "files": {
-    "main.css": "/react-projects/productmanager/static/css/main.609978c8.chunk.css",
-    "main.js": "/react-projects/productmanager/static/js/main.dd3eba21.chunk.js",
-    "main.js.map": "/react-projects/productmanager/static/js/main.dd3eba21.chunk.js.map",
-    "runtime~main.js": "/react-projects/productmanager/static/js/runtime~main.8a0560ec.js",
-    "runtime~main.js.map": "/react-projects/productmanager/static/js/runtime~main.8a0560ec.js.map",
-    "static/css/2.76d17235.chunk.css": "/react-projects/productmanager/static/css/2.76d17235.chunk.css",
-    "static/js/2.a4bc2866.chunk.js": "/react-projects/productmanager/static/js/2.a4bc2866.chunk.js",
-    "static/js/2.a4bc2866.chunk.js.map": "/react-projects/productmanager/static/js/2.a4bc2866.chunk.js.map",
+    "main.css": "/react-projects/productmanager/static/css/main.a968b61e.chunk.css",
+    "main.js": "/react-projects/productmanager/static/js/main.854dd0cc.chunk.js",
+    "main.js.map": "/react-projects/productmanager/static/js/main.854dd0cc.chunk.js.map",
+    "runtime-main.js": "/react-projects/productmanager/static/js/runtime-main.d9599c91.js",
+    "runtime-main.js.map": "/react-projects/productmanager/static/js/runtime-main.d9599c91.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/react-projects/productmanager/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.1d0b8923.chunk.js": "/react-projects/productmanager/static/js/2.1d0b8923.chunk.js",
+    "static/js/2.1d0b8923.chunk.js.map": "/react-projects/productmanager/static/js/2.1d0b8923.chunk.js.map",
     "index.html": "/react-projects/productmanager/index.html",
-    "precache-manifest.3204fd84e2329bcd89d1fad77dbb2d8f.js": "/react-projects/productmanager/precache-manifest.3204fd84e2329bcd89d1fad77dbb2d8f.js",
-    "service-worker.js": "/react-projects/productmanager/service-worker.js",
-    "static/css/2.76d17235.chunk.css.map": "/react-projects/productmanager/static/css/2.76d17235.chunk.css.map",
-    "static/css/main.609978c8.chunk.css.map": "/react-projects/productmanager/static/css/main.609978c8.chunk.css.map",
-    "static/media/pe-icon-7-stroke.css": "/react-projects/productmanager/static/media/Pe-icon-7-stroke.c45f7de0.svg",
-    "static/media/bootstrap.min.css": "/react-projects/productmanager/static/media/glyphicons-halflings-regular.fa277232.woff",
-    "static/media/loan.jpg": "/react-projects/productmanager/static/media/loan.524ae784.jpg",
-    "static/media/reactlogo.png": "/react-projects/productmanager/static/media/reactlogo.9b864b36.png"
-  }
+    "static/css/2.4c97ca4f.chunk.css.map": "/react-projects/productmanager/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.a968b61e.chunk.css.map": "/react-projects/productmanager/static/css/main.a968b61e.chunk.css.map",
+    "static/js/2.1d0b8923.chunk.js.LICENSE.txt": "/react-projects/productmanager/static/js/2.1d0b8923.chunk.js.LICENSE.txt",
+    "static/media/pe-icon-7-stroke.css": "/react-projects/productmanager/static/media/Pe-icon-7-stroke.7233a7ae.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d9599c91.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.1d0b8923.chunk.js",
+    "static/css/main.a968b61e.chunk.css",
+    "static/js/main.854dd0cc.chunk.js"
+  ]
 }
