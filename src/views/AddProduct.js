@@ -37,25 +37,25 @@ class AddProduct extends Component {
 
   updateForm(e, type){
     
-    if(type == "title"){
+    if(type === "title"){
       this.setState({title: e.target.value})
     }
-    if(type == "intRate"){
+    if(type === "intRate"){
       this.setState({intRate: e.target.value})
     }
-    if(type == "compRate"){
+    if(type === "compRate"){
       this.setState({compRate: e.target.value})
     }
-    if(type == "image"){
+    if(type === "image"){
       this.setState({image: e.target.value})
     }
-    if(type == "desc"){
+    if(type === "desc"){
       this.setState({desc: e.target.value})
     }
-    if(type == "viewLink"){
+    if(type === "viewLink"){
       this.setState({viewLink: e.target.value})
     }
-    if(type == "applyLink"){
+    if(type === "applyLink"){
       this.setState({applyLink: e.target.value})
     }
 

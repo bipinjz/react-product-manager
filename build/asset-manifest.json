@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-projects/productmanager/static/css/main.a968b61e.chunk.css",
-    "main.js": "/react-projects/productmanager/static/js/main.854dd0cc.chunk.js",
-    "main.js.map": "/react-projects/productmanager/static/js/main.854dd0cc.chunk.js.map",
+    "main.js": "/react-projects/productmanager/static/js/main.aea1d8bf.chunk.js",
+    "main.js.map": "/react-projects/productmanager/static/js/main.aea1d8bf.chunk.js.map",
     "runtime-main.js": "/react-projects/productmanager/static/js/runtime-main.d9599c91.js",
     "runtime-main.js.map": "/react-projects/productmanager/static/js/runtime-main.d9599c91.js.map",
     "static/css/2.4c97ca4f.chunk.css": "/react-projects/productmanager/static/css/2.4c97ca4f.chunk.css",
@@ -19,6 +19,6 @@
     "static/css/2.4c97ca4f.chunk.css",
     "static/js/2.1d0b8923.chunk.js",
     "static/css/main.a968b61e.chunk.css",
-    "static/js/main.854dd0cc.chunk.js"
+    "static/js/main.aea1d8bf.chunk.js"
   ]
 }
