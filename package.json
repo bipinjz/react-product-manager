@@ -2,7 +2,7 @@
   "name": "product-manager-dashboard-react",
   "version": "1.3.0",
   "private": true,
-  "homepage": "/react-projects/productmanager/",
+  "homepage": "/",
   "dependencies": {
     "bootstrap": "3.3.7",
     "chartist": "0.10.1",
