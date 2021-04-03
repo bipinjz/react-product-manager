@@ -58,7 +58,7 @@ class ProductsList extends Component {
   }
 
   getProducts = () => {
-    fetch("http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/")
+    fetch("https://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/")
       .then(res => res.json())
       .then(
         (result) => {

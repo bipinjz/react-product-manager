@@ -53,7 +53,7 @@ class EditProduct extends Component {
 
     const id = this.props.location.state.id;
 
-    fetch("http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id)
+    fetch("https://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/"+id)
       .then(res => res.json())
       .then(
         (result) => {
