@@ -81,7 +81,7 @@ class Dashboard extends Component {
                 statsText="Products"
                 statsValue={this.state.productsCount}
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText={<Link to="/admin/productsList">More Info</Link>}
+                statsIconText={<Link to="/admin/productsList">Manage All Products</Link>}
               />
             </Col>
             <Col lg={3} sm={6}>
@@ -90,7 +90,7 @@ class Dashboard extends Component {
                 statsText="Campaigns"
                 statsValue="3"
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText={<Link to="/admin/campaignList">More Info</Link>}
+                statsIconText={<Link to="/admin/campaignList">Manage All Compaigns</Link>}
               />
             </Col>
             <Col lg={3} sm={6}>
@@ -99,7 +99,7 @@ class Dashboard extends Component {
                 statsText="Completed "
                 statsValue="2"
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText="More Info"
+                statsIconText="Details"
               />
             </Col>
             <Col lg={3} sm={6}>
@@ -108,7 +108,7 @@ class Dashboard extends Component {
                 statsText="Scheduled"
                 statsValue="1"
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText="More Info"
+                statsIconText="Details"
               />
             </Col>
             
