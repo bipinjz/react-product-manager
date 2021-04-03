@@ -117,7 +117,7 @@ class Admin extends Component {
           />
 
 
-          {(this.state.userToken === "")? <Login getToken={this.getToken}></Login> : <Switch>{this.getRoutes(routes)}</Switch>}    
+           <Switch>{this.getRoutes(routes)}</Switch>   
           
           <Footer />
           
