@@ -109,7 +109,7 @@ class EditProduct extends Component {
           label_link: applyLink
         }  })
     };
-    fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/'+id, requestOptions)
+    fetch('https://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/wp/v2/posts/'+id, requestOptions)
         .then(async response => {
             const data = await response.json();
 

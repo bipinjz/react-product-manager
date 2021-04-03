@@ -33,7 +33,7 @@ class Login extends Component {
           'Content-Type': 'application/json'
         }
     };
-    fetch('http://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/jwt-auth/v1/token?username=reacteditor&password=kErwI8At5%A)YsrAkCMxi!!p', requestOptions)
+    fetch('https://bipinbajracharya.com/portfolio/react-product-manager-admin/wp-json/jwt-auth/v1/token?username=reacteditor&password=kErwI8At5%A)YsrAkCMxi!!p', requestOptions)
         .then(async response => {
             const data = await response.json();
 
