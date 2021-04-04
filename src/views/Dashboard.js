@@ -99,7 +99,7 @@ class Dashboard extends Component {
                 statsText="Completed "
                 statsValue="2"
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText="Details"
+                statsIconText="Details "
               />
             </Col>
             <Col lg={3} sm={6}>
@@ -108,7 +108,7 @@ class Dashboard extends Component {
                 statsText="Scheduled"
                 statsValue="1"
                 statsIcon={<i className="fa fa-chevron-right" />}
-                statsIconText="Details"
+                statsIconText="Details "
               />
             </Col>
             
