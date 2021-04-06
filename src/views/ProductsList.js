@@ -108,7 +108,13 @@ class ProductsList extends Component {
     } else {
     return (
       <div className="content">
+        
         <Grid fluid>
+          <Row>
+            <Col md={12}>
+            <div className="text-right"><Link to={{ pathname: '/admin/addProduct/'}} > Add New Product  </Link></div>
+            </Col>  
+          </Row>
           <Row>
             <Col md={12}>
               <Card
