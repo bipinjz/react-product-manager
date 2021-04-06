@@ -114,7 +114,6 @@ class AddProduct extends Component {
   render() {
 
 
-    const isLoggedIn = this.state.isLoggedIn;
     let content;
     if (this.state.userToken === undefined) {
       content = <Login getToken={this.getToken}></Login>;
