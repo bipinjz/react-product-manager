@@ -13,7 +13,7 @@ import { Card } from "components/Card/Card.js";
 import { FormInputs } from "components/FormInputs/FormInputs.js";
 import { UserCard } from "components/UserCard/UserCard.js";
 import Button from "components/CustomButton/CustomButton.js";
-
+import Login from "views/Login";
 
 class AddProduct extends Component {
 
@@ -33,6 +33,11 @@ class AddProduct extends Component {
       
     };
   }  
+
+  getToken = (tokenData) =>{
+    this.setState({userToken: tokenData.token})
+    this.setState({userName: tokenData.user_display_name})
+}
 
 
   updateForm(e, type){
@@ -64,7 +69,8 @@ class AddProduct extends Component {
 
   savePost(pTitle, intRate, compRate, image, viewLink,applyLink) {
     
-    const token = this.props.userToken;
+    //const token = this.props.userToken;
+    const token  = this.state.userToken;
 
     const requestOptions = {
         method: 'POST',
@@ -107,157 +113,168 @@ class AddProduct extends Component {
 
   render() {
 
+
+    const isLoggedIn = this.state.isLoggedIn;
+    let content;
+    if (this.state.userToken === undefined) {
+      content = <Login getToken={this.getToken}></Login>;
+    } else {
+      content =   <Grid fluid>
+      <Row>
+        <Col md={8}>
+          <Card
+            title="Add Product"
+            content={
+              <form>
+                
+                                    <FormInputs 
+                  ncols={["col-md-12"]}
+                  properties={[
+                    {
+                      label: "Title",
+                      type: "text",
+                      bsClass: "form-control",
+                      placeholder: "Enter Product Title",
+                      defaultValue:
+                        "",
+                        onChange : (event) => this.updateForm(event, "title")
+                    }
+                  ]}
+                />
+                <Row>
+                  <Col md={12}>
+                    <FormGroup controlId="formControlsTextarea">
+                      <ControlLabel>Image</ControlLabel>
+                      <select className="form-control" onChange={(event) => this.updateForm(event, "image")}>
+                      <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
+                      <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
+                      <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
+                    </select>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <FormInputs
+                  ncols={["col-md-6"]}
+                  properties={[
+                    {
+                      label: "Interest Rate",
+                      type: "text",
+                      bsClass: "form-control",
+                      placeholder: "Enter Interest Rate",
+                      defaultValue: "",
+                      onChange : (event) => this.updateForm(event, "intRate")
+                    }
+                  ]}
+                />
+
+              <FormInputs
+                  ncols={["col-md-6"]}
+                  properties={[
+                    
+                    {
+                      label: "Comparison Rate",
+                      type: "text",
+                      bsClass: "form-control",
+                      placeholder: "Enter Comparison Rate",
+                      defaultValue: "",
+                      onChange : (event) => this.updateForm(event, "compRate")
+                    }
+                  ]}
+                />
+
+                <Row>
+                  <Col md={12}>
+                    <FormGroup controlId="formControlsTextarea">
+                      <ControlLabel>Description</ControlLabel>
+                      <FormControl
+                        rows="5"
+                        componentClass="textarea"
+                        bsClass="form-control"
+                        placeholder="Enter Description"
+                        defaultValue="" onChange = {(event) => this.updateForm(event, "desc")}
+                      />
+                    </FormGroup>
+                  </Col>
+                </Row>
+                
+            
+                <FormInputs
+                  ncols={["col-md-6"]}
+                  properties={[
+                    
+                    {
+                      label: "Apply Link",
+                      type: "text",
+                      bsClass: "form-control",
+                      placeholder: "Enter Apply Link",
+                      defaultValue: "",
+                      onChange : (event) => this.updateForm(event, "applyLink")
+                    }
+                  ]}
+                />
+                <FormInputs
+                  ncols={["col-md-6"]}
+                  properties={[
+                    
+                    {
+                      label: "Learn More Link",
+                      type: "text",
+                      bsClass: "form-control",
+                      placeholder: "Enter Learn More",
+                      defaultValue: "",
+                      onChange : (event) => this.updateForm(event, "viewLink")
+                    }
+                  ]}
+                />
+                <Button bsStyle="info" onClick={() => this.savePost(
+                  this.state.title, this.state.intRate, this.state.compRate,
+                  this.state.image, this.state.viewLink, this.state.applyLink
+                  
+                  )} pullRight fill >
+                  Add Product
+                </Button>
+                <div className="clearfix" />
+              </form>
+            }
+          />
+        </Col>
+        <Col md={4}>
+          <UserCard
+            bgImage={this.state.image}
+            avatar=""
+            name={this.state.title}
+            userName=""
+            description={
+              <span>
+                <span>Int Rate: {this.state.intRate} % p.a <br/></span>
+                <span>Comp Rate: {this.state.compRate} % p.a <br/></span>
+                <span>{this.state.desc}</span>
+                
+              </span>
+            }
+            socials={
+              <div>
+                <Button simple>
+                  View Details
+                </Button>
+                <Button simple>
+                  Apply
+                </Button>
+                
+              </div>
+            }
+          />
+        </Col>
+      </Row>
+    </Grid>
+  ;
+    }
+
     return (
       <div className="content">
        
-        <Grid fluid>
-          <Row>
-            <Col md={8}>
-              <Card
-                title="Add Product"
-                content={
-                  <form>
-                    
-                                        <FormInputs 
-                      ncols={["col-md-12"]}
-                      properties={[
-                        {
-                          label: "Title",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Enter Product Title",
-                          defaultValue:
-                            "",
-                            onChange : (event) => this.updateForm(event, "title")
-                        }
-                      ]}
-                    />
-                    <Row>
-                      <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>Image</ControlLabel>
-                          <select className="form-control" onChange={(event) => this.updateForm(event, "image")}>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/fixed-rate-home-loan-oo.jpg">Image 1</option>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/11/media-2046-personal-loan-summary-page.jpg">Image 2</option>
-                          <option value="http://bipinbajracharya.com/portfolio/react-product-manager-admin/files/2020/10/loan.jpg">Image 3</option>
-                        </select>
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <FormInputs
-                      ncols={["col-md-6"]}
-                      properties={[
-                        {
-                          label: "Interest Rate",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Enter Interest Rate",
-                          defaultValue: "",
-                          onChange : (event) => this.updateForm(event, "intRate")
-                        }
-                      ]}
-                    />
-
-                  <FormInputs
-                      ncols={["col-md-6"]}
-                      properties={[
-                        
-                        {
-                          label: "Comparison Rate",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Enter Comparison Rate",
-                          defaultValue: "",
-                          onChange : (event) => this.updateForm(event, "compRate")
-                        }
-                      ]}
-                    />
-
-                    <Row>
-                      <Col md={12}>
-                        <FormGroup controlId="formControlsTextarea">
-                          <ControlLabel>Description</ControlLabel>
-                          <FormControl
-                            rows="5"
-                            componentClass="textarea"
-                            bsClass="form-control"
-                            placeholder="Enter Description"
-                            defaultValue="" onChange = {(event) => this.updateForm(event, "desc")}
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    
-                
-                    <FormInputs
-                      ncols={["col-md-6"]}
-                      properties={[
-                        
-                        {
-                          label: "Apply Link",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Enter Apply Link",
-                          defaultValue: "",
-                          onChange : (event) => this.updateForm(event, "applyLink")
-                        }
-                      ]}
-                    />
-                    <FormInputs
-                      ncols={["col-md-6"]}
-                      properties={[
-                        
-                        {
-                          label: "Learn More Link",
-                          type: "text",
-                          bsClass: "form-control",
-                          placeholder: "Enter Learn More",
-                          defaultValue: "",
-                          onChange : (event) => this.updateForm(event, "viewLink")
-                        }
-                      ]}
-                    />
-                    <Button bsStyle="info" onClick={() => this.savePost(
-                      this.state.title, this.state.intRate, this.state.compRate,
-                      this.state.image, this.state.viewLink, this.state.applyLink
-                      
-                      )} pullRight fill >
-                      Add Product
-                    </Button>
-                    <div className="clearfix" />
-                  </form>
-                }
-              />
-            </Col>
-            <Col md={4}>
-              <UserCard
-                bgImage={this.state.image}
-                avatar=""
-                name={this.state.title}
-                userName=""
-                description={
-                  <span>
-                    <span>Int Rate: {this.state.intRate} % p.a <br/></span>
-                    <span>Comp Rate: {this.state.compRate} % p.a <br/></span>
-                    <span>{this.state.desc}</span>
-                    
-                  </span>
-                }
-                socials={
-                  <div>
-                    <Button simple>
-                      View Details
-                    </Button>
-                    <Button simple>
-                      Apply
-                    </Button>
-                    
-                  </div>
-                }
-              />
-            </Col>
-          </Row>
-        </Grid>
+       {content}
+       
       </div>
     );
   }
