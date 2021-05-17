@@ -42,7 +42,7 @@ class Sidebar extends Component {
             href="/"
             className="simple-text logo-normal"
           >
-            Product Manager
+            React Product Admin
           </a>
           
         </div>
